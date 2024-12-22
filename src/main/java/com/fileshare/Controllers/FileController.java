@@ -13,15 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fileshare.Dto.FileDto;
 import com.fileshare.Dto.Request.FileUploadRequestDto;
 import com.fileshare.Dto.Response.FileUploadResponseDto;
-import com.fileshare.Model.File;
 import com.fileshare.Service.FileService;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 @RestController
 @RequestMapping("/api/v1/files")

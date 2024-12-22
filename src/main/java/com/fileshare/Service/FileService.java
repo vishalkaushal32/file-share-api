@@ -17,19 +17,23 @@ import com.fileshare.Dto.Request.FileUploadRequestDto;
 import com.fileshare.Dto.Response.FileUploadResponseDto;
 import com.fileshare.Model.File;
 import com.fileshare.Repository.FileRepository;
+import com.fileshare.config.AppProperties;
 
 @Service
 public class FileService {
 
     @Autowired
     private FileRepository fileRepository;
+    
+    @Autowired
+    private AppProperties appProps;
 
     public FileUploadResponseDto uploadFiles(FileUploadRequestDto requestDto) throws IOException {
         List<MultipartFile> files = requestDto.getFiles();
         LocalDateTime ttl = requestDto.getTtl();
 
         // Validate constraints
-        if (files.size() > 5) {
+        if (files.size() > appProps.getMaxFileCount()) {
             throw new IllegalArgumentException("You can upload a maximum of 5 files at once.");
         }
 
@@ -41,7 +45,7 @@ public class FileService {
 
         // Process each file
         for (MultipartFile file : files) {
-            if (file.getSize() > 5 * 1024 * 1024) {
+            if (file.getSize() > appProps.getMaxFileSizeBytes()) {
                 throw new IllegalArgumentException("File size cannot exceed 5 MB.");
             }
 
