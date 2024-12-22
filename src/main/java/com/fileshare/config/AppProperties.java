@@ -9,7 +9,6 @@ import lombok.Data;
 @Configuration
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {
-    private String apiKey;
     private long maxFileSizeBytes;
     private int maxFileCount;
 }
